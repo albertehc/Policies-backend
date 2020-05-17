@@ -108,7 +108,7 @@ exports.delete = async (req, res) => {
     if (!checkPassword)
       return res.status(401).json({ msg: "Password incorrect" });
     await User.findByIdAndRemove(id);
-    res.clearCookie(process.env.WEBSITENAME);
+    res.clearCookie(process.env.WEBSITENAME || 'Test');
     res.status(200).json({ msg: "User deleted" });
   } catch (e) {
     console.error(e);
@@ -118,7 +118,7 @@ exports.delete = async (req, res) => {
 
 exports.logout = async (req, res) => {
   try {
-    res.clearCookie(process.env.WEBSITENAME);
+    res.clearCookie(process.env.WEBSITENAME || 'Test');
     res.status(200).json({ msg: "Log out sucesfully" });
   } catch (e) {
     console.error(e);

@@ -1,8 +1,8 @@
 const signToken = require("./../helpers/signToken");
 
 module.exports = (res, token) => {
-  res.cookie(process.env.WEBSITENAME, signToken(token), {
-    maxAge: parseInt(process.env.COOKIEEXPIRATION),
+  res.cookie(process.env.WEBSITENAME || 'Test', signToken(token), {
+    maxAge: parseInt(process.env.COOKIEEXPIRATION || 432000000),
     httpOnly: true,
     secure: false,
     sameSite: true

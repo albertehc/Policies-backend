@@ -1,13 +1,13 @@
 const jwt = require("jsonwebtoken");
 
 module.exports = (req, res, next) => {
-  if (!req.cookies[process.env.WEBSITENAME]) {
+  if (!req.cookies[process.env.WEBSITENAME || 'Test']) {
     return res.json({ msg: "Unauthorized" });
   }
   if (!req.body.password) req.body.password = req.body.oldPassword;
-  const token = req.cookies[process.env.WEBSITENAME];
+  const token = req.cookies[process.env.WEBSITENAME || 'Test'];
   try {
-    const signature = jwt.verify(token, process.env.SECRETKEY);
+    const signature = jwt.verify(token, process.env.SECRETKEY || 'SOMESUPERSECRETKEY');
     req.body.token = signature;
     next();
   } catch (e) {
