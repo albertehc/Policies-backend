@@ -28,6 +28,9 @@ policies: [
     clientId: String
   }
 ]
+## Postman Collection
+
+You can import policies.json on POSTMAN to test all API Responses
 
 ## API Endpoints
 
