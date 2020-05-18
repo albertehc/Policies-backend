@@ -2,6 +2,7 @@ const bcryptjs = require("bcryptjs");
 const { validationResult } = require("express-validator");
 const sendCookie = require("./../helpers/sendCookie");
 const DB = require("../models/DB");
+const payload = require('./../helpers/payload');
 
 exports.login = async (req, res) => {
   const errors = validationResult(req);
@@ -19,14 +20,8 @@ exports.login = async (req, res) => {
     const checkPassword = await bcryptjs.compare(password, user.password);
     if (!checkPassword)
       return res.status(401).json({ msg: "Password not valid" });
-    const payload = {
-      id: user.id,
-      name: user.name,
-      email,
-      role: user.role,
-    };
 
-    sendCookie(res, payload);
+    sendCookie(res, payload(user));
   } catch (e) {
     console.error(e);
     res.status(500).json({ msg: "Server error" });
@@ -42,13 +37,7 @@ exports.me = async (req, res) => {
 
   try {
     const user = await DB.getClientByEmail(email);
-    const payload = {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      role: user.role,
-    };
-    sendCookie(res, payload);
+    sendCookie(res, payload(user));
   } catch (e) {
     console.error(e);
     res.status(500).json({ msg: "Server error" });
@@ -88,8 +77,7 @@ exports.edit = async (req, res) => {
       role,
       password: hashPassword,
     }, id);
-    const payload = { id, name, email, role };
-    sendCookie(res, payload);
+    sendCookie(res, payload({ ...req.body, id }));
   } catch (e) {
     console.error(e);
     res.status(500).json({ msg: "Server error" });
