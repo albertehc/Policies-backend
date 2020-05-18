@@ -1,29 +1,25 @@
 const bcryptjs = require("bcryptjs");
 const { validationResult } = require("express-validator");
-const User = require("./../models/User");
+const { v4: uuidv4 } = require('uuid');
 const sendCookie = require("./../helpers/sendCookie");
+const Clients = require("./../models/Clients");
 
 exports.signup = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ msg: errors.array()[0].msg });
   }
-  const { email, password, username, theme, language } = req.body;
+  const { email, password, name, role } = req.body;
 
   try {
-    let user = await User.findOne({ email });
-    if (user) {
+    if (Clients.getUserByEmail(email)) {
       return res.status(400).json({ msg: "Email already exist" });
     }
+    const id = uuidv4();
     const salt = await bcryptjs.genSalt(10);
     req.body.password = await bcryptjs.hash(password, salt);
-    const userDB = await User.collection.insertOne({
-      ...req.body,
-      created_at: Date.now(),
-      updated_at: Date.now(),
-    });
-    const { _id } = userDB.ops[0];
-    const payload = { id: _id, username, email, theme, language };
+    Clients.signup({ ...req.body, id });
+    const payload = { id, name, email, role };
     sendCookie(res, payload);
   } catch (e) {
     console.error(e);

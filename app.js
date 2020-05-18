@@ -1,13 +1,15 @@
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const connectDB = require("./config/db.config");
 require("dotenv").config();
+const Clients = require('./models/Clients');
+const Policies = require('./models/Clients');
 
 const app = express();
 const port = process.env.PORT || 4000;
-connectDB();
 
+Clients.getData();
+//setInterval(()=>console.log(Clients.data),2000);
 
 
 app.use(cookieParser());

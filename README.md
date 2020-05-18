@@ -6,11 +6,14 @@ Backend with Express, Json web token, Cookies, Express-validator, Cords, Bcryptj
 
 ## Schemas
 
+
+
 clients: [
   {
     id: String,
     name: String,
     email: String,
+    passwod: String,
     role: String
   }
 ]
