@@ -1,12 +1,19 @@
 # Policies-backend
 
+## Installation & Run
+*Install:*
+### `npm i or yarn install`
+*Production:*
+### `npm start or yarn start`
+*Development:*
+### `npm run build or yarn run build`
+
 ## Description
 
 Backend with Express, Json web token, Cookies, Express-validator, Cords, Bcryptjs, Cookie parser.
+If you want to implement a real DATABASE you can add on /models/DB.js the querys from your DB
 
 ## Schemas
-
-
 
 clients: [
   {
