@@ -12,6 +12,7 @@
 
 Backend with Express, Json web token, Cookies, Express-validator, Cords, Bcryptjs, Cookie parser.
 If you want to implement a real DATABASE you can add on /models/DB.js the querys from your DB
+All configs have default settings, if you want to change something rename .env.example to .env and change what you want
 
 ## Schemas
 
