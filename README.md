@@ -44,7 +44,7 @@ policies: [
 - GET /api/policies/name/:name
   - 200 OK
   - 401 Invalid Token / Unauthorized
-   - 404 Not Found
+  - 404 Not Found
   - 500 Server error
 - GET /api/policies/policy/:policy
   - 200 OK

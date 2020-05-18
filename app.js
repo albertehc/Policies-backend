@@ -3,13 +3,20 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
 const DB = require('./models/DB');
-const Policies = require('./models/DB');
 
 const app = express();
 const port = process.env.PORT || 4000;
 
-DB.getData();
 
+const getApiData = async () => {
+  try {
+    await DB.getData();
+    console.log('API data loaded sucesfully')
+  } catch (e) {
+    console.error(e)
+  }
+}
+getApiData();
 app.use(cookieParser());
 app.use(cors({ credentials: true, origin: '*' }));
 

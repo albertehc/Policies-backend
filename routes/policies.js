@@ -6,6 +6,6 @@ const auth = require("./../middleware/auth");
 
 router.get("/name/:name", auth, admin, policiesController.name);
 
-router.get("/policy/:policy", auth, admin, policiesController.policy);
+router.get("/policy/:id", auth, admin, policiesController.policy);
 
 module.exports = router;
