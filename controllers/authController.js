@@ -1,7 +1,7 @@
 const bcryptjs = require("bcryptjs");
 const { validationResult } = require("express-validator");
 const sendCookie = require("./../helpers/sendCookie");
-const Clients = require("./../models/Clients");
+const DB = require("../models/DB");
 
 exports.login = async (req, res) => {
   const errors = validationResult(req);
@@ -12,7 +12,7 @@ exports.login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = Clients.getUserByEmail(email);
+    const user = DB.getClientByEmail(email);
     if (!user) {
       return res.status(401).json({ msg: "Email not valid" });
     }
@@ -41,7 +41,7 @@ exports.me = async (req, res) => {
   }
 
   try {
-    const user = await Clients.getUserByEmail(email);
+    const user = await DB.getClientByEmail(email);
     const payload = {
       id: user.id,
       name: user.name,
@@ -63,14 +63,13 @@ exports.edit = async (req, res) => {
   const { name, email, password, role } = req.body;
   let { oldPassword } = req.body;
   const { id } = req.body.token;
-  console.log(id)
+
   try {
     if (email !== req.body.token.email) {
-      const checkEmail = await Clients.getUserByEmail(email);
+      const checkEmail = await DB.getClientByEmail(email);
       if (checkEmail) return res.status(401).json({ msg: "Email already in use" });
     }
-    const userData = Clients.getUserById(id);
-    console.log(userData,id);
+    const userData = DB.getClientById(id);
     const checkPassword = await bcryptjs.compare(
       oldPassword,
       userData.password
@@ -82,10 +81,11 @@ exports.edit = async (req, res) => {
       const salt = await bcryptjs.genSalt(10);
       hashPassword = await bcryptjs.hash(password, salt);
     }
-    Clients.edit({
+    DB.editClient({
       id,
       name,
       email,
+      role,
       password: hashPassword,
     }, id);
     const payload = { id, name, email, role };
@@ -100,13 +100,13 @@ exports.delete = async (req, res) => {
   const { id } = req.body.token;
   const { password } = req.body;
   try {
-    const userData = await Clients.getUserById(id);
+    const userData = await DB.getClientById(id);
     if (!password) return res.status(400).json({ msg: "Password empty" });
     const checkPassword = await bcryptjs.compare(password,
       userData.password);
     if (!checkPassword)
       return res.status(401).json({ msg: "Password incorrect" });
-    Clients.remove(id);
+    DB.removeClient(id);
     res.clearCookie(process.env.WEBSITENAME || "Test");
     res.status(200).json({ msg: "Client deleted" });
   } catch (e) {

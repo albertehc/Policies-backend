@@ -31,25 +31,29 @@ policies: [
 
 ## API Endpoints
 
+- GET /api/clients/id/:id
+  - 200 OK
+  - 401 Invalid Token / Unauthorized
+  - 404 Not Found
+  - 500 Server error
+- GET /api/clients/name/:name
+  - 200 OK
+  - 401 Invalid Token / Unauthorized
+  - 404 Not Found
+  - 500 Server error
+- GET /api/policies/name/:name
+  - 200 OK
+  - 401 Invalid Token / Unauthorized
+   - 404 Not Found
+  - 500 Server error
+- GET /api/policies/policy/:policy
+  - 200 OK
+  - 401 Invalid Token / Unauthorized
+  - 404 Not Found
+  - 500 Server error
 - GET /api/auth/me - Check auth
   - 200 OK
   - 400 Validation error
-  - 401 Invalid Token / Unauthorized
-  - 500 Server error
-- GET /api/users/:id
-  - 200 OK
-  - 401 Invalid Token / Unauthorized
-  - 500 Server error
-- GET /api/users/:name
-  - 200 OK
-  - 401 Invalid Token / Unauthorized
-  - 500 Server error
-- GET /api/policies/:name
-  - 200 OK
-  - 401 Invalid Token / Unauthorized
-  - 500 Server error
-- GET /api/policies/:policy
-  - 200 OK
   - 401 Invalid Token / Unauthorized
   - 500 Server error
 - POST /api/signup - Register
