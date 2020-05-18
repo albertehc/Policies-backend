@@ -31,7 +31,7 @@ policies: [
 
 ## API Endpoints
 
-- GET /api/auth/me Refresh cookie
+- GET /api/auth/me - Check auth
   - 200 OK
   - 400 Validation error
   - 401 Invalid Token / Unauthorized
@@ -52,20 +52,29 @@ policies: [
   - 200 OK
   - 401 Invalid Token / Unauthorized
   - 500 Server error
-- POST /api/signup Register - Body: { "password": "12345678", "email": "email@email.com", "name": "username" }
+- POST /api/signup - Register
+  Body: { "password": "12345678", "email": "email@email.com", "name": "username" }
   - 200 OK
   - 400 Validation error
   - 500 Server error
-- POST /api/auth Login - Body: { "password": "12345678", "email": "email@email.com" }
+- POST /api/auth - Login
+  Body: { "password": "12345678", "email": "email@email.com" }
   - 200 OK
   - 400 Validation error
   - 500 Server error
-- PUT /api/auth Edit user info - Body: { "oldPassword": "old password", "email": "email@email.com", "name": "username" password: "new password" }
+- POST /api/auth/logout - Logout
+  Body: { "password": "12345678" }
+  - 200 OK
+  - 400 Validation error
+  - 500 Server error
+- PUT /api/auth - Edit user info
+  Body: { "oldPassword": "old password", "email": "email@email.com", "name": "username" password: "new password" }
   - 200 OK
   - 400 Validation error
   - 401 Invalid Token / Unauthorized
   - 500 Server error
-- DELETE /api/auth Delete user - Body: { "password": "password" }
+- DELETE /api/auth - Delete user
+  Body: { "password": "password" }
   - 200 OK
   - 400 Validation error
   - 401 Invalid Token / Unauthorized
