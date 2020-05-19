@@ -4,7 +4,7 @@ module.exports = (req, res, next) => {
     if (role === "admin" || role === "user") {
       next();
     } else {
-      return res.status(401).json({ msg: "Unauthorized" });
+      return res.status(403).json({ msg: "Forbidden" });
     }
   } catch (e) {
     console.error(e);
