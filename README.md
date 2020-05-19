@@ -45,21 +45,25 @@ You can import policies.json on POSTMAN to test all API Responses
 - GET /api/clients/id/:id
   - 200 OK
   - 401 Invalid Token / Unauthorized
+  - 403 Forbidden
   - 404 Not Found
   - 500 Server error
 - GET /api/clients/name/:name
   - 200 OK
   - 401 Invalid Token / Unauthorized
+  - 403 Forbidden
   - 404 Not Found
   - 500 Server error
 - GET /api/policies/name/:name
   - 200 OK
   - 401 Invalid Token / Unauthorized
+  - 403 Forbidden
   - 404 Not Found
   - 500 Server error
 - GET /api/policies/policy/:policy
   - 200 OK
   - 401 Invalid Token / Unauthorized
+  - 403 Forbidden
   - 404 Not Found
   - 500 Server error
 - GET /api/auth/me - Check auth
