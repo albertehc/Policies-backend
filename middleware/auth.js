@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 module.exports = (req, res, next) => {
   const websiteName = process.env.WEBSITENAME || "Test";
   const hasCookie = req.cookies[websiteName];
-
   if (!hasCookie) {
     return res.status(401).json({ msg: "Unauthorized" });
   }

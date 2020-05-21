@@ -29,6 +29,6 @@ app.use("/api/auth", require("./routes/auth"));
 app.use("/api/clients", require("./routes/clients"));
 app.use("/api/policies", require("./routes/policies"));
 
-app.listen(port, "0.0.0.0", () => {
+module.exports = app.listen(port, "0.0.0.0", () => {
   console.log(`Running on port ${port}`);
 });

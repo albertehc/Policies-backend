@@ -7,11 +7,13 @@
 ### `npm start or yarn start`
 *Development:*
 ### `npm run build or yarn run build`
+*Test:*
+### `npm test or yarn test`
 
 ## Description
 
 Backend with Express, Json web token, Cookies, Express-validator, Cords, Bcryptjs, Cookie parser.
-If you want to implement a real DATABASE you can add on /models/DB.js the querys from your DB
+If you want to implement a real DATABASE you can add on /models/DB.js the querys from your DB, actually is a mock DB from API json.
 All configs have default settings, if you want to change something rename .env.example to .env and change what you want
 
 ## Schemas
@@ -80,11 +82,11 @@ You can import policies.json on POSTMAN to test all API Responses
   Body: { "password": "12345678", "email": "email@email.com" }
   - 200 OK
   - 400 Validation error
+  - 401 Invalid Token / Unauthorized
   - 500 Server error
 - POST /api/auth/logout - Logout
-  Body: { "password": "12345678" }
   - 200 OK
-  - 400 Validation error
+  - 401 Invalid Token / Unauthorized
   - 500 Server error
 - PUT /api/auth - Edit user info
   Body: { "oldPassword": "old password", "email": "email@email.com", "name": "username" password: "new password" }

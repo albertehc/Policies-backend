@@ -12,8 +12,8 @@ class DB {
     const apiPolicies = await axios.get(
       "http://www.mocky.io/v2/580891a4100000e8242b75c5"
     );
-    this.clients = apiClients.clients;
-    this.policies = apiPolicies.policies;
+    this.clients = this.clients.concat(apiClients.clients);
+    this.policies = this.policies.concat(apiPolicies.policies);
     return true;
   }
   signupClient(user) {
