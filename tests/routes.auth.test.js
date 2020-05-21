@@ -3,7 +3,6 @@ const supertest = require("supertest");
 const request = supertest(app);
 const { user } = require("./client.js");
 
-
 describe("Auth Route", () => {
   let cookie;
   describe("Login", () => {
@@ -28,14 +27,11 @@ describe("Auth Route", () => {
   });
   describe("Me", () => {
     it("Me - 200", async () => {
-      const res = await request
-        .get("/api/auth")
-        .set("Cookie", cookie)
+      const res = await request.get("/api/auth").set("Cookie", cookie);
       expect(res.statusCode).toBe(200);
     });
     it("Me - 401", async () => {
-      const res = await request
-        .get("/api/auth")
+      const res = await request.get("/api/auth");
       expect(res.statusCode).toBe(401);
     });
   });
@@ -44,7 +40,7 @@ describe("Auth Route", () => {
       const res = await request
         .put("/api/auth")
         .set("Cookie", cookie)
-        .send({ ...user, name: 'test2' });
+        .send({ ...user, name: "test2" });
       expect(res.statusCode).toBe(200);
     });
 
@@ -57,19 +53,14 @@ describe("Auth Route", () => {
     });
 
     it("Edit - 401 Invalid token", async () => {
-      const res = await request
-        .put("/api/auth")
-        .send(user);
+      const res = await request.put("/api/auth").send(user);
       expect(res.statusCode).toBe(401);
     });
   });
 
   describe("Log out", () => {
-
     it("Log out - 401", async () => {
-      const res = await request
-        .post("/api/auth/logout")
-        .send(user.password);
+      const res = await request.post("/api/auth/logout").send(user.password);
       expect(res.statusCode).toBe(401);
     });
 
@@ -92,9 +83,7 @@ describe("Auth Route", () => {
     });
 
     it("Delete - 401 Invalid token", async () => {
-      const res = await request
-        .delete("/api/auth")
-        .send(user);
+      const res = await request.delete("/api/auth").send(user);
       expect(res.statusCode).toBe(401);
     });
 

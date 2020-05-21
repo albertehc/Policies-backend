@@ -2,7 +2,7 @@ const bcryptjs = require("bcryptjs");
 const { validationResult } = require("express-validator");
 const sendCookie = require("./../helpers/sendCookie");
 const DB = require("../models/DB");
-const payload = require('./../helpers/payload');
+const payload = require("./../helpers/payload");
 
 exports.login = async (req, res) => {
   const errors = validationResult(req);
@@ -56,7 +56,8 @@ exports.edit = async (req, res) => {
   try {
     if (email !== req.body.token.email) {
       const checkEmail = await DB.getClientByEmail(email);
-      if (checkEmail) return res.status(401).json({ msg: "Email already in use" });
+      if (checkEmail)
+        return res.status(401).json({ msg: "Email already in use" });
     }
     const userData = DB.getClientById(id);
     const checkPassword = await bcryptjs.compare(
@@ -70,13 +71,16 @@ exports.edit = async (req, res) => {
       const salt = await bcryptjs.genSalt(10);
       hashPassword = await bcryptjs.hash(password, salt);
     }
-    DB.editClient({
-      id,
-      name,
-      email,
-      role,
-      password: hashPassword,
-    }, id);
+    DB.editClient(
+      {
+        id,
+        name,
+        email,
+        role,
+        password: hashPassword,
+      },
+      id
+    );
     sendCookie(res, payload({ ...req.body, id }));
   } catch (e) {
     console.error(e);
@@ -90,8 +94,7 @@ exports.delete = async (req, res) => {
   try {
     const userData = await DB.getClientById(id);
     if (!password) return res.status(400).json({ msg: "Password empty" });
-    const checkPassword = await bcryptjs.compare(password,
-      userData.password);
+    const checkPassword = await bcryptjs.compare(password, userData.password);
     if (!checkPassword)
       return res.status(401).json({ msg: "Password incorrect" });
     DB.removeClient(id);

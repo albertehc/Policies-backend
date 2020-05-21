@@ -1,6 +1,6 @@
 const DB = require("../models/DB");
 const sendCookie = require("./../helpers/sendCookie");
-const payload = require('./../helpers/payload');
+const payload = require("./../helpers/payload");
 
 exports.id = async (req, res) => {
   try {

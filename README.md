@@ -1,13 +1,21 @@
 # Policies-backend
 
 ## Installation & Run
-*Install:*
+
+_Install:_
+
 ### `npm i or yarn install`
-*Production:*
+
+_Production:_
+
 ### `npm start or yarn start`
-*Development:*
+
+_Development:_
+
 ### `npm run build or yarn run build`
-*Test:*
+
+_Test:_
+
 ### `npm test or yarn test`
 
 ## Description
@@ -19,25 +27,26 @@ All configs have default settings, if you want to change something rename .env.e
 ## Schemas
 
 clients: [
-  {
-    id: String,
-    name: String,
-    email: String,
-    passwod: String,
-    role: String
-  }
+{
+id: String,
+name: String,
+email: String,
+passwod: String,
+role: String
+}
 ]
 
 policies: [
-  {
-    id: String,
-    amountInsured: Number,
-    email: String,
-    inceptionDate: Date,
-    installmentPayment: Boolean,
-    clientId: String
-  }
+{
+id: String,
+amountInsured: Number,
+email: String,
+inceptionDate: Date,
+installmentPayment: Boolean,
+clientId: String
+}
 ]
+
 ## Postman Collection
 
 You can import policies.json on POSTMAN to test all API Responses

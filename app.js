@@ -2,24 +2,22 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
-const DB = require('./models/DB');
+const DB = require("./models/DB");
 
 const app = express();
 const port = process.env.PORT || 4000;
 
-
 const getApiData = async () => {
   try {
     await DB.getData();
-    console.log('API data loaded sucesfully')
+    console.log("API data loaded sucesfully");
   } catch (e) {
-    console.error(e)
+    console.error(e);
   }
-}
+};
 getApiData();
 app.use(cookieParser());
-app.use(cors({ credentials: true, origin: '*' }));
-
+app.use(cors({ credentials: true, origin: "*" }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

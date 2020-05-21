@@ -1,6 +1,6 @@
 const bcryptjs = require("bcryptjs");
 const { validationResult } = require("express-validator");
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require("uuid");
 const sendCookie = require("./../helpers/sendCookie");
 const DB = require("../models/DB");
 

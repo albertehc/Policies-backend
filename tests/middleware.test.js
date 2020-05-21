@@ -1,6 +1,5 @@
 const clientMiddleware = require("./../middleware/clients");
 const adminMiddleware = require("./../middleware/admin");
-const authMiddleware = require("./../middleware/auth");
 
 const mockResponse = () => {
   const res = {};

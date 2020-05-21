@@ -1,4 +1,3 @@
-
 const user = {
   password: "12345678",
   oldPassword: "12345678",
@@ -7,5 +6,4 @@ const user = {
   role: "admin",
 };
 
-
-module.exports = {user}
+module.exports = { user };

@@ -5,5 +5,5 @@ module.exports = (token) => {
     email: token.email,
     role: token.role,
   };
-  return payload
-}
+  return payload;
+};
